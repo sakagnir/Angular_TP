@@ -1,0 +1,16 @@
+<div class="meteo">
+    <h2>Météo de {{city}}</h2>
+    
+    <div class="donnee-meteo">
+        <p>{{temp}}°C</p>
+        @if (condition == "Ensoleillé") {
+            <p>☀️ {{condition}} </p>
+        } @else if (condition == "Nuageux") {
+            <p>☁️ {{condition}} </p>
+        } @else if (condition == "Pluvieux") {
+            <p>🌧️ {{condition}} </p>
+        }
+        <p>💧 {{humidity}}% d'humidité</p>
+        <p>💨 {{wind}} km/h</p>
+    </div>
+</div>
