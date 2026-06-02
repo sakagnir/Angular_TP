@@ -1,0 +1,57 @@
+import { Component, inject, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { DigimonGraphqlService } from '../../services/digimon-graphql';
+import { FavorisService } from '../../services/favoris';
+import { DigimonPage } from '../../models/digimon.model';
+
+@Component({
+  selector: 'app-digimon-list',
+  imports: [FormsModule, RouterLink],
+  templateUrl: './digimon-list.html',
+  styleUrl: './digimon-list.scss',
+})
+export class DigimonListComponent {
+  private service = inject(DigimonGraphqlService);
+  protected favoris = inject(FavorisService)
+
+  page = signal<DigimonPage | null | undefined>(null);
+  loading = signal(true);
+  error = signal<string | null>(null);
+  recherche = signal('');
+  pageCourante = signal(0);
+
+  ngOnInit() {
+    this.charger();
+  }
+
+  charger() {
+    this.loading.set(true);
+    this.error.set(null);
+    const nom = this.recherche().trim() || undefined;
+    this.service.getDigimons(this.pageCourante(), 20, nom).subscribe({
+      next: data => { this.page.set(data); this.loading.set(false); },
+      error: () => {
+        this.error.set('Le serveur Graphql (:4000) est il lancé ?');
+        this.loading.set(false);
+      }
+    });
+  }
+
+  rechercher() {
+    this.pageCourante.set(0);
+    this.charger();
+  }
+
+  pagePrecedente() {
+    if (this.pageCourante() > 0) {
+      this.pageCourante.update(p => p - 1);
+      this.charger();
+    }
+  }
+
+  pageSuivante() {
+    this.pageCourante.update(p => p + 1);
+    this.charger();
+  }
+}
