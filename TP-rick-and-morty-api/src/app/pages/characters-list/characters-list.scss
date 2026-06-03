@@ -1,0 +1,29 @@
+.grille {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 50px;
+    padding: 40px;
+    article{
+        padding: 15px;
+    }
+}
+
+.pagination {
+    display: flex;
+    gap: 10px;
+    align-items: anchor-center;
+    justify-content: center;
+    button{
+        height: 60%;
+    }
+}
+
+.name-favorite{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    button {
+        width: 30px;
+        height: 30px;
+    }
+}

@@ -1,19 +1,24 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
+import { Character } from '../models/character.model';
+import { CharacterService } from './character-service';
+import { StorageService } from './storage-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FavorisService {
-  private _favoris = signal<string[]>([]);
+  private _favoris = signal<Character[]>([]);
+  private service = inject(CharacterService);
+  private storage = inject(StorageService);
 
   favoris = this._favoris.asReadonly()
   nombre = computed(() => this._favoris().length);
 
-  estFavoris(name: string): boolean {
-    return this._favoris().includes(name);
+  isFavori(id: number): boolean {
+    return this._favoris().some( c => c.id === id);
   }
 
-  basculer(name: string) {
-    this._favoris.update(list => list.includes(name) ? list.filter(n => n !== name) : [...list, name])
+  toggle(c: Character): void {
+    this._favoris.update(list => list.includes(c) ? list.filter(n => n !== c) : [...list, c])
   }
 }

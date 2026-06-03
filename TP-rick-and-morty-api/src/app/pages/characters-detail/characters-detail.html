@@ -1,0 +1,16 @@
+@if (loading()) {
+<span>⌛ Chargement en cours</span>
+} @else {
+<div class="grille">
+    <h2>{{ character()?.name}}</h2>
+    <img src="{{character()?.image}}" alt="character_picture">
+    <p>Gender: {{ character()?.gender}}</p>
+    <p>Status: {{ character()?.status}}</p>
+    <p>Status: {{ character()?.species}}</p>
+    @if (character()?.type) {
+        <p>Type {{ character()?.type}}</p>
+    }
+    <p>Current Location: <a routerLink="/location/{{character()?.location?.id}}">{{ character()?.location?.name}}</a> </p>
+    <p>World of Origin: <a routerLink="/locations">{{ character()?.origin?.name}}</a> </p>
+</div>
+}

@@ -11,8 +11,8 @@ export interface Character {
         url: string
     };
     location: {
+        id: number
         name: string,
         url: string
     }
-
 }

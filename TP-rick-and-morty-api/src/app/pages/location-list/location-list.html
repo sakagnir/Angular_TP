@@ -1,0 +1,16 @@
+<div class="grille">
+    @for (l of locations(); track l.id) {
+        <a routerLink="/locations/{{l.id}}">
+            <h3>{{ l.name }}</h3>
+            <p>{{ l.dimension }}</p>
+            <p>{{ l.type }}</p>
+        </a>
+    }
+</div>
+<div class="pagination">
+    @if (currentPage() != 1) {
+    <button (click)="prevPage()">Previous Page</button>
+    }
+    <p>{{ currentPage() }} / {{ pageMax() }}</p>
+    <button (click)="nextPage()">Next Page</button>
+</div>
