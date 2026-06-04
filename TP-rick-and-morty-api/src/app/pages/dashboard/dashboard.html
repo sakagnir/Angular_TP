@@ -1,1 +1,79 @@
-<p>dashboard works!</p>
+<div class="dashboard">
+    <h1>Dashboard</h1>
+    <p>Nombres de personages: {{ totalCharacters() }}</p>
+    <p>Nombres de Lieux: {{ totalLocations() }}</p>
+    <p>Nombres d'Épisodes: {{ totalEpisodes() }}</p>
+    <p>Nombre de personnages en favoris: {{favoris.favoris().length}}</p>
+
+    <div class="favorites">
+        <div class="alive-favorite">
+            <h3>Personnages favoris en vie</h3>
+            @for (c of favoris.favoris(); track c.id) {
+            @if (c.status == "Alive") {
+            <article>
+                <div class="name-favorite">
+                    <h3>{{ c.name }}</h3>
+                    <button (click)="favoris.toggle(c)">
+                        {{ favoris.isFavori(c.id) ? '⭐' : '☆' }}
+                    </button>
+                </div>
+                <a routerLink="/characters/{{c.id}}">
+                    <img src="{{ c.image }}" alt="character_picture">
+                </a>
+                <div class="div-lieux">
+                    <p>Location</p>
+                    <a routerLink="/locations/{{c.location.id}}">{{ c.location.name }}</a>
+                </div>
+                <p>Status: {{ c.status }}</p>
+            </article>
+            }
+            }
+        </div>
+        <div>
+            <h3>Personnages favoris mort</h3>
+            @for (c of favoris.favoris(); track c.id) {
+            @if (c.status == "Dead") {
+            <article>
+                <div class="name-favorite">
+                    <h3>{{ c.name }}</h3>
+                    <button (click)="favoris.toggle(c)">
+                        {{ favoris.isFavori(c.id) ? '⭐' : '☆' }}
+                    </button>
+                </div>
+                <a routerLink="/characters/{{c.id}}">
+                    <img src="{{ c.image }}" alt="character_picture">
+                </a>
+                <div class="div-lieux">
+                    <p>Location</p>
+                    <a routerLink="/locations/{{c.location.id}}">{{ c.location.name }}</a>
+                </div>
+                <p>Status: {{ c.status }}</p>
+            </article>
+            }
+            }
+        </div>
+        <div>
+            <h3>Personnages favoris dont le status est inconnu</h3>
+            @for (c of favoris.favoris(); track c.id) {
+            @if (c.status == "unknown") {
+            <article>
+                <div class="name-favorite">
+                    <h3>{{ c.name }}</h3>
+                    <button (click)="favoris.toggle(c)">
+                        {{ favoris.isFavori(c.id) ? '⭐' : '☆' }}
+                    </button>
+                </div>
+                <a routerLink="/characters/{{c.id}}">
+                    <img src="{{ c.image }}" alt="character_picture">
+                </a>
+                <div class="div-lieux">
+                    <p>Location</p>
+                    <a routerLink="/locations/{{c.location.id}}">{{ c.location.name }}</a>
+                </div>
+                <p>Status: {{ c.status }}</p>
+            </article>
+            }
+            }
+        </div>
+    </div>
+</div>

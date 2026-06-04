@@ -13,21 +13,20 @@ export class CharacterService {
   private url = `${environment.apiBaseUrl}/character`;
 
   getAll(page: number, name?: string, status?: string): Observable<CharacterResponse> {
-    let query;
-    if (page) {
-      query = this.http.get<CharacterResponse>(`${this.url}?page=${page}`);
-    } else {
-      query = this.http.get<CharacterResponse>(`${this.url}`);
+    const params: string[] = [];
+    if (page) params.push(`page=${page}`);
+    if (name) params.push(`name=${encodeURIComponent(name)}`);
+    if (status) params.push(`status=${encodeURIComponent(status)}`);
 
-    }
-    return query;
+    const queryStr = params.length ? `?${params.join('&')}` : '';
+    return this.http.get<CharacterResponse>(`${this.url}${queryStr}`);
   }
 
   getById(id: number): Observable<Character> {
     return this.http.get<Character>(`${this.url}/${id}`);
   }
 
-  getMaby(ids: number[]): Observable<Character[]> {
+  getMany(ids: number[]): Observable<Character[]> {
     let joinedId = ids.join(',')
     return this.http.get<Character[]>(`${this.url}/${joinedId}`);
   }

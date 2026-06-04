@@ -1,10 +1,16 @@
+@if (loading()) {
+<p>⏳ Chargement…</p>
+} @else if (error()) {
+<p class="error">❌ {{ error() }}</p>
+} @else {
+    <h1>Lieux</h1>
 <div class="grille">
     @for (l of locations(); track l.id) {
-        <a routerLink="/locations/{{l.id}}">
-            <h3>{{ l.name }}</h3>
-            <p>{{ l.dimension }}</p>
-            <p>{{ l.type }}</p>
-        </a>
+    <a routerLink="/locations/{{l.id}}">
+        <h3>{{ l.name }}</h3>
+        <p>{{ l.dimension }}</p>
+        <p>{{ l.type }}</p>
+    </a>
     }
 </div>
 <div class="pagination">
@@ -14,3 +20,4 @@
     <p>{{ currentPage() }} / {{ pageMax() }}</p>
     <button (click)="nextPage()">Next Page</button>
 </div>
+}

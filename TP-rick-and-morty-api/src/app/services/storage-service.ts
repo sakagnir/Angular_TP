@@ -5,10 +5,14 @@ import { effect, Injectable } from '@angular/core';
 })
 export class StorageService {
   get<T>(key: string): T | null {
-    let data = localStorage.getItem(key);
-    if (data) {
-      let parsedData = JSON.parse(data);
-      return parsedData;
+    try {
+      const data = localStorage.getItem(key);
+      if (data) {
+        return JSON.parse(data);
+      }
+    } catch (error) {
+      console.error(`Erreur parsing localStorage[${key}]:`, error);
+      localStorage.removeItem(key);
     }
     return null;
   }

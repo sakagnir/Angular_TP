@@ -1,1 +1,16 @@
-<p>episode-detail works!</p>
+<div class="episode">
+    <h2>{{ episode()?.name }}</h2>
+    <p>{{ episode()?.episode }}</p>
+    <p>{{ episode()?.air_date }}</p>
+    <div class="grille">
+        @for (c of characters(); track c.id) {
+            <a routerLink="/characters/{{c.id}}">
+                <h3>{{ c.name }}</h3>
+                <img src="{{c.image}}" alt="character_picture">
+                <p>{{ c.status }}</p>
+            </a>
+            } @empty {
+            <p>Aucun personnage associé</p>
+        }
+    </div>
+</div>

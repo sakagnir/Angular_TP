@@ -3,10 +3,11 @@ import { LocationService } from '../../services/location-service';
 import { Location } from '../../models/location.model';
 import { CharacterService } from '../../services/character-service';
 import { Character } from '../../models/character.model';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-location-detail',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './location-detail.html',
   styleUrl: './location-detail.scss',
 })
@@ -32,7 +33,7 @@ export class LocationDetailComponent {
           }
         });
         this.location.set(l);
-        this.characterService.getMaby(this.ids).subscribe({
+        this.characterService.getMany(this.ids).subscribe({
           next: characters => {
             this.residents.set(characters);
           }

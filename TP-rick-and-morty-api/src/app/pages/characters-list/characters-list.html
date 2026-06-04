@@ -1,10 +1,20 @@
-
-
 @if (loading()) {
 <p>⏳ Chargement…</p>
 } @else if (error()) {
 <p class="error">❌ {{ error() }}</p>
 } @else {
+    <h1>Personnages</h1>
+<form class="filtres" (submit)="$event.preventDefault(); rechercher()">
+    <input [(ngModel)]="recherche" name="q" placeholder="Nom de la carte…" />
+
+    <select (change)="filterStatus($any($event.target).value)">
+        <option value="">— Status —</option>
+        @for (s of status; track s) { <option [value]="s">{{ s }}</option> }
+    </select>
+
+    <button>Rechercher</button>
+    <button type="button" (click)="reinitialiser()">Réinitialiser</button>
+</form>
 <div class="grille">
     @for (c of characters(); track c.id) {
     <article>
@@ -21,7 +31,7 @@
             <p>Location</p>
             <a routerLink="/locations/{{c.location.id}}">{{ c.location.name }}</a>
         </div>
-        <p>Origin: {{ c.origin.name }}</p>
+        <p>Status: {{ c.status }}</p>
     </article>
     } @empty {
     <p>There are no characters</p>

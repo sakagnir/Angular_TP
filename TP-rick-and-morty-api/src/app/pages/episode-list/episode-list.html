@@ -1,1 +1,25 @@
-<p>episode-list works!</p>
+<h1>Épisodes</h1>
+
+@if (loading()) {
+<p>⏳ Chargement…</p>
+} @else if (error()) {
+<p class="error">❌ {{ error() }}</p>
+} @else {
+<div class="grille">
+    @for (e of episodes(); track e.id) {
+    <a routerLink="/episodes/{{ e.id }}">
+        <h3>{{ e.name }}</h3>
+        <p>{{ e.episode }}</p>
+        <p>{{ e.air_date }}</p>
+    </a>
+    }
+</div>
+
+<div class="pagination">
+    @if (currentPage() != 1) {
+    <button (click)="prevPage()">Previous Page</button>
+    }
+    <p>{{ currentPage() }} / {{ maxPage }}</p>
+    <button (click)="nextPage()">Next Page</button>
+</div>
+}

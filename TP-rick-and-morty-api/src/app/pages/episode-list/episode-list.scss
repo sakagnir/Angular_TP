@@ -1,0 +1,34 @@
+h1 {
+    display: flex;
+    justify-content: center;
+}
+
+.grille {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 50px;
+    padding: 40px;
+
+    a {
+        color: black;
+        border: 0.5px solid gray;
+        border-radius: 20px;
+        padding: 10px 20px;
+
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: 3px 3px 3px lightgray;
+        }
+    }
+}
+
+.pagination {
+    display: flex;
+    gap: 10px;
+    align-items: anchor-center;
+    justify-content: center;
+
+    button {
+        height: 60%;
+    }
+}

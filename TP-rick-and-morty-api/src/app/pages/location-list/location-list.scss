@@ -16,6 +16,11 @@
     }
 }
 
+h1 {
+    display: flex;
+    justify-content: center;
+}
+
 .pagination {
     display: flex;
     gap: 10px;

@@ -1,0 +1,32 @@
+.grille {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 50px;
+    padding: 40px;
+    text-align: center;
+
+    a {
+        text-decoration: none;
+        color: black;
+        border: 0.5px solid gray;
+        border-radius: 20px;
+        padding: 10px 20px;
+
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: 3px 3px 3px lightgray;
+        }
+    }
+
+    ;
+}
+
+.episode {
+    text-align: center;
+    padding-top: 10px;
+}
+
+h2 {
+    display: flex;
+    justify-content: center;
+}

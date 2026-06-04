@@ -1,4 +1,14 @@
 .grille {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    gap: 50px;
+    padding: 40px;
+
+    article {
+        padding: 15px;
+    }
+}
+
+.location-detail {
+    padding: 40px;
 }

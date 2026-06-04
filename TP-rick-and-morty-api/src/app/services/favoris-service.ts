@@ -14,8 +14,20 @@ export class FavorisService {
   favoris = this._favoris.asReadonly()
   nombre = computed(() => this._favoris().length);
 
+  constructor() {
+    const savedFavoris = this.storage.get<Character[]>('favoris');
+    if (savedFavoris) {
+      this._favoris.set(savedFavoris);
+    }
+
+    effect(() => {
+      this.storage.set('favoris', this._favoris());
+    });
+  }
+
+
   isFavori(id: number): boolean {
-    return this._favoris().some( c => c.id === id);
+    return this._favoris().some(c => c.id === id);
   }
 
   toggle(c: Character): void {

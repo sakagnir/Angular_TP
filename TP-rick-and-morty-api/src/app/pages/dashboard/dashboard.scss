@@ -1,0 +1,40 @@
+h1 {
+    display: flex;
+    justify-content: center;
+}
+
+.dashboard {
+    padding: 40px;
+    text-align: center;
+}
+
+.favorites {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: left;
+    div {
+        width: 70%;
+        article {
+            margin-bottom: 20px;
+            border: 0.5px solid gray;
+            border-radius: 20px;
+            padding: 10px 20px;
+
+            &:hover {
+                transform: translateY(-4px);
+                box-shadow: 3px 3px 3px lightgray;
+            }
+        }
+    }
+}
+
+.name-favorite {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+        width: 30px;
+        height: 30px;
+    }
+}

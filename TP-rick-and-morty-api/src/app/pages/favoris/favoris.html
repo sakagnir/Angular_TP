@@ -1,1 +1,23 @@
-<p>favoris works!</p>
+<h1>Favoris</h1>
+<div class="grille">
+    @for (c of savedFavoris(); track c.id) {
+    <article>
+        <div class="name-favorite">
+            <h3>{{ c.name }}</h3>
+            <button (click)="service.toggle(c); this.ngOnInit();">
+                {{ service.isFavori(c.id) ? '⭐' : '☆' }}
+            </button>
+        </div>
+        <a routerLink="/characters/{{c.id}}">
+            <img src="{{ c.image }}" alt="character_picture">
+        </a>
+        <div class="div-lieux">
+            <p>Location</p>
+            <a routerLink="/locations/{{c.location.id}}">{{ c.location.name }}</a>
+        </div>
+        <p>Status: {{ c.status }}</p>
+    </article>
+    } @empty {
+    <p>There are no characters</p>
+    }
+</div>
